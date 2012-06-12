@@ -221,7 +221,7 @@ Toolbar::Toolbar(BScreen &scrn, FbTk::Layer &layer, size_t width):
     m_rc_placement(scrn.resourceManager(), Toolbar::BOTTOMCENTER,
                    scrn.name() + ".toolbar.placement", scrn.altName() + ".Toolbar.Placement"),
     m_rc_height(scrn.resourceManager(), 0, scrn.name() + ".toolbar.height", scrn.altName() + ".Toolbar.Height"),
-    m_rc_tools(scrn.resourceManager(), "prevworkspace, workspacename, nextworkspace, iconbar, systemtray, clock",
+    m_rc_tools(scrn.resourceManager(), "prevworkspace, workspacename, nextworkspace, taskbar, iconbar, systemtray, clock",
                scrn.name() + ".toolbar.tools", scrn.altName() + ".Toolbar.Tools"),
     m_shape(new FbTk::Shape(frame.window, 0)),
     m_resize_lock(false) {
