@@ -28,6 +28,7 @@
 
 #include "AtomHandler.hh"
 #include "ClientPattern.hh"
+#include "Application.hh" // FbExt
 
 
 #include <map>
@@ -149,6 +150,7 @@ public:
     bool propertyNotify(WinClient &winclient, Atom the_property) { return false; }
 
     static Remember &instance() { return *s_instance; }
+    FbExt::ApplicationsList &getApplicationsList() { return(m_applications_list); }
 
 private:
 
@@ -159,6 +161,7 @@ private:
     static Remember *s_instance;
 
     FbTk::AutoReloadHelper* m_reloader;
+    FbExt::ApplicationsList m_applications_list;
 };
 
 #endif // REMEMBER_HH

@@ -1270,7 +1270,6 @@ void Fluxbox::load_rc(BScreen &screen) {
         if (!m_screen_rm.load(DEFAULT_INITFILE))
             cerr<<_FB_CONSOLETEXT(Fluxbox, CantLoadRCFile, "Failed to load database", "")<<": "<<DEFAULT_INITFILE<<endl;
     }
-    m_applications_list = FbExt::readApplicationsList(m_RC_PATH + "/tasks");
 }
 
 void Fluxbox::reconfigure() {

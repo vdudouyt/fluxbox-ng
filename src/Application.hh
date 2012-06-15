@@ -36,7 +36,7 @@ class WinClient;
 namespace FbExt {
 class Application  {
 	public:
-	Application(std::string executable);
+	Application(std::string executable, std::string name, std::string icon);
 	~Application();
 	bool window_of(WinClient *client);
 	void read_desktop_file(std::string fileName);
@@ -70,6 +70,7 @@ std::string getExecutableByWindow(Display *display, Window w);
 typedef std::vector<Application*> ApplicationsList;
 ApplicationsList readApplicationsList(std::string fileName);
 bool isWindowOf(Application *app, const std::string& s);
+Application *parseAppSpec(std::string spec);
 }
 
 #endif

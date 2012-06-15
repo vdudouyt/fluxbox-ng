@@ -42,6 +42,7 @@
 #include "FbTk/AutoReloadHelper.hh"
 #include "FbTk/RefCount.hh"
 #include "FbTk/Util.hh"
+#include "Application.hh"
 
 #ifdef HAVE_CSTRING
   #include <cstring>
@@ -778,6 +779,9 @@ void Remember::reload() {
                     }
                     // save the item even if it was bad (aren't we nice)
                     m_startups.push_back(line.substr(pos));
+                } else if (pos > 0 && strcasecmp(key.c_str(), "pin") == 0) {
+			string spec = line.substr(6);
+			m_applications_list.push_back(FbExt::parseAppSpec(spec));
                 } else if (pos > 0 && strcasecmp(key.c_str(), "group") == 0) {
                     in_group = true;
                     if (line.find('(') != string::npos)

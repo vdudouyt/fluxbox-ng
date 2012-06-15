@@ -39,6 +39,7 @@
 #include "ScreenPlacement.hh"
 #include "Toolbar.hh"
 #include "fluxbox.hh"
+#include "Remember.hh"
 
 namespace {
 class ShowMenuAboveToolbar: public FbTk::Command<void> {
@@ -106,7 +107,7 @@ ToolbarItem *ToolFactory::create(const std::string &name, const FbTk::FbWindow &
 			m_unfocused_iconbar_theme,
 			screen(),
 			tbar.menu(),
-			Fluxbox::instance()->getApplicationsList());
+			Remember::instance().getApplicationsList());
     } else {
 
         std::string cmd_str = name;

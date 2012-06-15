@@ -28,6 +28,7 @@
 #include <algorithm>
 #include "Application.hh"
 #include "WinClient.hh"
+#include "FbTk/StringUtil.hh"
 
 namespace FbExt {
 
@@ -37,9 +38,30 @@ using std::endl;
 Application::~Application() {
 }
 
-Application::Application(std::string executable = ""):
+Application::Application(std::string executable="", std::string name="", std::string icon=""):
 	executable(executable),
 	clientIndex(0) {
+}
+
+Application *parseAppSpec(std::string spec) {
+	std::cout << "spec=" << spec << std::endl;
+	int pos = 0;
+	std::string pair, name, exec, icon;
+	while((pos = FbTk::StringUtil::getStringBetween(pair, spec.substr(pos).c_str(), '(', ')')) > 0) {
+		size_t separator = pair.find('=');
+		if(separator != std::string::npos) {
+			std::string key = pair.substr(0, separator);
+			std::string value = pair.substr(separator+1);
+			if(key == "name")
+				name = value;
+			else if(key == "exec")
+				exec = value;
+			else if(key == "icon")
+				icon = value;
+		}
+	}
+	if(exec.empty()) exec = name;
+	return(new Application(exec, name, icon));
 }
 
 void Application::read_desktop_file(std::string fileName) {

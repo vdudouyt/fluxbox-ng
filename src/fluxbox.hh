@@ -189,7 +189,7 @@ public:
     const XEvent &lastEvent() const { return m_last_event; }
 
     AttentionNoticeHandler &attentionHandler() { return m_attention_handler; }
-    FbExt::ApplicationsList &getApplicationsList() { return(m_applications_list); }
+    //FbExt::ApplicationsList &getApplicationsList() { return(m_applications_list); }
 
 private:
     std::string getRcFilename();
@@ -306,7 +306,7 @@ private:
     Atom m_kwm1_dockwindow, m_kwm2_dockwindow;
 
     AttentionNoticeHandler m_attention_handler;
-    FbExt::ApplicationsList m_applications_list;
+    //FbExt::ApplicationsList m_applications_list;
 };
 
 

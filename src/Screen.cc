@@ -56,6 +56,7 @@
 #include "RectangleUtil.hh"
 #include "FbCommands.hh"
 #include "SystemTray.hh"
+#include "Remember.hh"
 #include "Debug.hh"
 
 #include "FbTk/I18n.hh"
@@ -1269,7 +1270,7 @@ FluxboxWindow *BScreen::createWindow(Window client) {
     }
 
     // check if it should belong to taskbar
-    FbExt::ApplicationsList app_list = Fluxbox::instance()->getApplicationsList();
+    FbExt::ApplicationsList app_list = Remember::instance().getApplicationsList();
     const std::string &appName = winclient->getExecutableName();
     FbExt::ApplicationsList::iterator it = std::find_if(app_list.begin(), app_list.end(), bind2nd(std::ptr_fun(&FbExt::isWindowOf), appName));
     if(it != app_list.end()) {

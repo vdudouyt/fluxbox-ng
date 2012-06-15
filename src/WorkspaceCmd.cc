@@ -31,6 +31,7 @@
 #include "FocusControl.hh"
 #include "WindowCmd.hh"
 #include "FbCommands.hh"
+#include "Remember.hh"
 
 #include "FbTk/KeyUtil.hh"
 #include "FbTk/CommandParser.hh"
@@ -394,7 +395,7 @@ JumpToAppCmd::JumpToAppCmd(int app_num):m_app_num(app_num) { }
 void JumpToAppCmd::execute() {
 	BScreen *screen = Fluxbox::instance()->mouseScreen();
 	std::cout << "Selecting app: " << m_app_num << std::endl;
-	FbExt::ApplicationsList apps_list = Fluxbox::instance()->getApplicationsList();
+	FbExt::ApplicationsList apps_list = Remember::instance().getApplicationsList();
 	if(apps_list.size() <= m_app_num)
 		return;
 	FbExt::Application *app = apps_list[m_app_num];
