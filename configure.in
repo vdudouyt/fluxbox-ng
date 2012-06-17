@@ -665,14 +665,6 @@ AC_ARG_WITH(
 AC_SUBST(DEFAULT_APPS)
 
 AC_ARG_WITH(
-  tasks,
-  [  --with-tasks=path        location tasks file (PREFIX/share/fluxbox/tasks)],
-  DEFAULT_TASKS=$with_apps,
-  DEFAULT_TASKS=\$\(prefix\)/share/fluxbox/tasks
-)
-AC_SUBST(DEFAULT_TASKS)
-
-AC_ARG_WITH(
   overlay,
   [  --with-overlay=path     location overlay file (PREFIX/share/fluxbox/overlay)],
   DEFAULT_OVERLAY=$with_overlay,

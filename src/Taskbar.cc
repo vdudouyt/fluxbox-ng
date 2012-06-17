@@ -33,12 +33,8 @@ AppIcon::AppIcon(BScreen &scr, unsigned int app_num, FbExt::Application &app):
 		m_app_num(app_num),
 		m_app(app),
 		m_rc_icontheme(scr.resourceManager(), "", "taskbar.iconTheme", "Taskbar.IconTheme") {
-		std::string icon_path = resolve_icon_path(m_rc_icontheme.get(), app.get_icon_name());
-		cout << "icon_path=" << icon_path << endl;
-		FbTk::PixmapWithMask *pixm = FbTk::Image::load(icon_path, scr.screenNumber());
-		if(pixm)
-			m_icon = *pixm;
 }
+
 void AppIcon::setFocusFlag(bool flag) {
 	m_focused = flag;
 	notifyFocusChanged();
@@ -50,10 +46,6 @@ bool AppIcon::focus() {
 
 bool AppIcon::window_of(WinClient *client) {
 	return(m_app.window_of(client));
-}
-
-std::string AppIcon::resolve_icon_path(std::string icon_theme, std::string icon_name) {
-	return("/usr/share/icons/" + icon_theme + "/apps/32/" + icon_name + ".png");
 }
 
 Taskbar::Taskbar(const FbTk::FbWindow &parent, IconbarTheme &theme,

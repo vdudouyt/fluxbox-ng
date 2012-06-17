@@ -341,7 +341,6 @@ void setupConfigFiles(const std::string& dirname, const std::string& rc) {
         { !has_dir, DEFAULTKEYSFILE, dirname + "/keys" },
         { !has_dir, DEFAULTMENU, dirname + "/menu" },
         { !has_dir, DEFAULT_APPSFILE, dirname + "/apps" },
-        { !has_dir, DEFAULT_TASKSFILE, dirname + "/tasks" },
         { !has_dir, DEFAULT_OVERLAY, dirname + "/overlay" },
         { !has_dir, DEFAULT_WINDOWMENU, dirname + "/windowmenu" }
     };
