@@ -38,8 +38,10 @@ using std::endl;
 Application::~Application() {
 }
 
-Application::Application(std::string executable="", std::string name="", std::string icon=""):
-	executable(executable),
+Application::Application(std::string executable="", std::string name="", std::string icon_path=""):
+	m_executable(executable),
+	m_name(name),
+	m_icon_path(icon_path),
 	clientIndex(0) {
 }
 
@@ -64,32 +66,6 @@ Application *parseAppSpec(std::string spec) {
 	return(new Application(exec, name, icon));
 }
 
-void Application::read_desktop_file(std::string fileName) {
-	std::ifstream file(fileName.c_str(), std::ios::in);
-	std::string line;
-	if(!file.is_open())
-		return;
-	while(!file.eof()) {
-		std::getline(file, line);
-		size_t separator = line.find_first_of('=');
-		if(separator == std::string::npos)
-			continue;
-		std::string key = line.substr(0, separator);
-		std::string value = line.substr(separator+1);
-		//std::cout << "key='" << key << "' value='" << value << "'" << std::endl;
-		options[key] = value;
-	}
-	// Executable name
-	this->executable = options["Exec"];
-	size_t separator = this->executable.find_first_of(" \t");
-	if(separator != std::string::npos)
-		this->executable = this->executable.substr(0, separator);
-	// Icon name
-	Options::iterator it = options.find("Icon");
-	if(it != options.end())
-		this->icon = options["Icon"];
-}
-
 bool Application::match(Application *app) {
 	return(this->get_executable() == app->get_executable());
 }
@@ -112,7 +88,7 @@ void Application::setCurrentClient(WinClient *client) {
 }
 
 bool Application::focus() {
-	cout << "executable=" << executable << endl;
+	//cout << "executable=" << executable << endl;
 }
 
 bool Application::isFocused() {
@@ -174,29 +150,7 @@ bool Application::window_of(WinClient *client) {
 	return(it != m_client_list.end());
 }
 
-
-ApplicationsList readApplicationsList(std::string fileName) {
-	ApplicationsList result;
-	std::ifstream file(fileName.c_str(), std::ios::in);
-	std::string line;
-	if(!file.is_open()) {
-		std::cout << "Couldn't open file: " << fileName << std::endl;
-		return(result);
-	}
-	while(!file.eof()) {
-			Application *app = new Application;
-			std::getline(file, line);
-			app->read_desktop_file(line);
-			if(line != "") {
-				std::cout << "Adding app " << app->get_executable() << std::endl;
-				result.push_back(app);
-			}
-	}
-	file.close();
-	return(result);
-}
-
 bool isWindowOf(Application *app, const std::string &s) {
-	return(app->get_executable() == s);
+	return(app->get_name() == s);
 }
 }

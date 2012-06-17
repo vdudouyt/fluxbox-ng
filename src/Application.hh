@@ -40,8 +40,9 @@ class Application  {
 	~Application();
 	bool window_of(WinClient *client);
 	void read_desktop_file(std::string fileName);
-	std::string get_executable() const { return this->executable; }
-	std::string get_icon_name() const { return this->icon; }
+	std::string get_executable() const { return m_executable; }
+	std::string get_name() const { return m_name; }
+	std::string get_icon_path() const { return m_icon_path; }
 	bool match(Application *app);
 	void add_client(WinClient *client);
 	void remove_client(WinClient *client); // called in ~WinClient
@@ -53,8 +54,7 @@ class Application  {
 	virtual bool isFocused();
 
 	private:
-	std::string executable;
-	std::string icon;
+	std::string m_executable, m_name, m_icon_path;
 	std::string m_icon_theme, m_icon_size;
 	Display *display;
 	typedef std::map<std::string, std::string> Options;
